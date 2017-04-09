@@ -1,2 +1,2 @@
 # ECE6254
-Project for classification of ECG signals
+Project for classification of ECG signals.
