@@ -1,0 +1,25 @@
+function [ RegEv ] = compute_RegEv( RR )
+%UNTITLED Summary of this function goes here
+%   INput: RR intrvals
+
+% COMPUTE RegularityEvidence
+%previous 6 or 12 beats vs till current time < 10s
+N_beat_space =6;
+n_bs = N_beat_space;
+for i = 1: length(RR)
+    if i<= floor((length(RR) )/n_bs)
+        n=i-1;
+        %med_st = med(RR(i):RR(i+6))
+        med_st(1 +(n_bs*n):n_bs*(n+1)) = median(RR((n_bs*n)+1): RR(n_bs*(n +1)))
+    else if i>floor((length(RR) )/n_bs) && 1+(n_bs*(i-1)) <=length(RR)
+        n= i-1;
+%        med_st(1+(n_bs*n) :end) = med_st( n_bs*n);
+
+    end
+    
+    end
+    med_lt(i) = median(RR(1): RR(i));
+end
+dmedltst = abs(med_lt-med_st) 
+RegEv = sum(dmedltst>1)
+
